@@ -1,14 +1,17 @@
 {
-  "name": "ahrarshah-api",
+  "name": "open-ai-api-backed",
   "version": "1.0.0",
   "description": "AI proxy API for Cohere",
   "main": "index.js",
+  "type": "module",
   "scripts": {
     "dev": "vercel dev",
     "start": "node index.js"
   },
   "dependencies": {
-    "node-fetch": "^3.4.1"
+    "node-fetch": "^3.3.2"
   },
-  "type": "module"
+  "engines": {
+    "node": "18.x"
+  }
 }
