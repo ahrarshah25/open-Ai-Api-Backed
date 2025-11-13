@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI Chat</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f2f2f2;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      min-height: 100vh;
+      padding-top: 50px;
+    }
+
+    .container {
+      background: #fff;
+      padding: 20px 30px;
+      border-radius: 10px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+      max-width: 600px;
+      width: 100%;
+    }
+
+    h1 {
+      text-align: center;
+      color: #333;
+    }
+
+    input {
+      width: 100%;
+      padding: 10px 15px;
+      margin: 10px 0;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      font-size: 16px;
+    }
+
+    button {
+      padding: 10px 20px;
+      background: #007bff;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 16px;
+    }
+
+    button:hover {
+      background: #0056b3;
+    }
+
+    #result {
+      margin-top: 20px;
+      background: #f9f9f9;
+      padding: 15px;
+      border-radius: 5px;
+      border: 1px solid #ddd;
+      white-space: pre-wrap;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <h1>AI Chat</h1>
+    <input id="userInput" placeholder="Type something..." />
+    <button onclick="askAI()">Ask AI</button>
+    <div id="result"></div>
+  </div>
+
+  <script>
+    async function askAI() {
+      const userInput = document.getElementById("userInput").value.trim();
+      if (!userInput) {
+        alert("Please type something!");
+        return;
+      }
+
+      const resultDiv = document.getElementById("result");
+      resultDiv.innerText = "Loading...";
+
+      try {
+        const response = await fetch(`/api/ai?prompt=${encodeURIComponent(userInput)}`);
+        const data = await response.json();
+
+        if (data.error) {
+          resultDiv.innerText = "Error: " + data.error;
+        } else if (data.result) {
+          // Display AI output nicely
+          resultDiv.innerText = JSON.stringify(data.result, null, 2);
+        } else {
+          resultDiv.innerText = "No response from AI";
+        }
+      } catch (err) {
+        resultDiv.innerText = "Fetch error: " + err.message;
+      }
+    }
+  </script>
+
+</body>
+</html>
