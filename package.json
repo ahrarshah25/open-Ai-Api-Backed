@@ -1,16 +1,14 @@
 {
-  "name": "asd-api",
+  "name": "ahrarshah-api",
   "version": "1.0.0",
-  "type": "module",
+  "description": "AI proxy API for Cohere",
+  "main": "index.js",
   "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next start"
+    "dev": "vercel dev",
+    "start": "node index.js"
   },
   "dependencies": {
-    "next": "^14.1.0",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
-    "node-fetch": "^3.3.2"
-  }
+    "node-fetch": "^3.4.1"
+  },
+  "type": "module"
 }
